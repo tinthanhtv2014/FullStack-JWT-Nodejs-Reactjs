@@ -1,0 +1,28 @@
+{
+  "name": "jwt-backend",
+  "version": "1.0.0",
+  "description": "jwt nodejs reactjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/server.js"
+  },
+  "author": "thanh nguyen",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/preset-env": "7.15.4",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.4.1",
+    "ejs": "^3.1.9",
+    "express": "4.17.2",
+    "mysql2": "^3.9.0",
+    "nodemon": "^3.0.3",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@babel/core": "7.15.4",
+    "@babel/node": "7.15.4",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^3.0.3"
+  }
+}
