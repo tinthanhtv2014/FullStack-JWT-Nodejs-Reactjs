@@ -1,8 +1,15 @@
 import express from "express";
+const bodyParser = require("body-parser");
+
 import configViewEngine from "./configs/viewEngine";
 import initwebRoutes from "./routes/web";
 require("dotenv").config();
+
 const app = express();
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 configViewEngine(app);
 initwebRoutes(app);
 
