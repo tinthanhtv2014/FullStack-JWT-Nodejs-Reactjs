@@ -1,5 +1,4 @@
-import connection from "../configs/database";
-
+import userService from "../service/userService";
 const handleHome = (req, res) => {
   const a = "ẻ";
   return res.render("home.ejs", { result: a });
@@ -14,16 +13,19 @@ const handleCreateNewUser = async (req, res) => {
   const userName = req.body.UserName;
   const password = req.body.passwordName;
 
-  const [results, fields] = await connection.execute(
-    "insert into users (email,password,username) values (?,?,?)",
-    [email, password, userName]
-  );
-  console.log("check results", results);
+  userService.createNewUser(email, password, userName);
+
   return res.send("ok");
 };
+
+// const handleGetUserList = async () => {
+//   let result = await userService.getUserList();
+//   return res.render("user.ejs", { datauser: result });
+// };
 
 module.exports = {
   handleHome,
   handleUserPage,
   handleCreateNewUser,
+  // handleGetUserList,
 };
