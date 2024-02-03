@@ -62,24 +62,22 @@
                 <th scope="col">#</th>
                 <th scope="col">Email</th>
                 <th scope="col">Username</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
+              <% for(let i=0; i < dataproduct.length; i++) { %>
               <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
+                <th scope="row"><%= dataproduct[i].id %></th>
+                <td><%= dataproduct[i].email %></td>
+                <td><%= dataproduct[i].username %></td>
+
+                <td>
+                  <button class="btn btn-warning">Edit</button>
+                  <button class="btn btn-danger">Delete</button>
+                </td>
               </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="1">Larry the Bird</td>
-                <td>@twitter</td>
-              </tr>
+              <% } %>
             </tbody>
           </table>
         </div>

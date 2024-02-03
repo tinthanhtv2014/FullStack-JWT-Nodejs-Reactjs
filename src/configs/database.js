@@ -1,5 +1,5 @@
 const mysql = require("mysql2/promise");
-
+const bluebird = require("bluebird");
 const connection = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -11,6 +11,7 @@ const connection = mysql.createPool({
   queueLimit: 0,
   enableKeepAlive: true,
   keepAliveInitialDelay: 0,
+  Promise: bluebird,
 });
 
 export default connection;

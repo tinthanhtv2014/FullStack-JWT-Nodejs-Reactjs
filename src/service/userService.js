@@ -14,22 +14,27 @@ const hashPassword = (userPassword) => {
 };
 
 const createNewUser = async (email, password, username) => {
-  let hashPass = hashPassword(password);
+  try {
+    let hashPass = hashPassword(password);
 
-  const [results, fields] = await connection.execute(
-    "insert into users (email,password,username) values (?,?,?)",
-    [email, hashPass, username]
-  );
+    const [results, fields] = await connection.execute(
+      "insert into users (email,password,username) values (?,?,?)",
+      [email, hashPass, username]
+    );
+    return results;
+  } catch (error) {
+    console.error("An error occurred:", error);
+    return res.status(500).send(error.message || "Đã có lỗi xảy ra");
+  }
+};
+
+const getUserList = async () => {
+  let users = [];
+  const [results, fields] = await connection.execute("select * from users");
   return results;
 };
 
-// const getUserList = async () => {
-//   let users = [];
-//   const [results, fields] = await connection.execute("select * from users");
-//   return results;
-// };
-
 module.exports = {
   createNewUser,
-  //   getUserList,
+  getUserList,
 };

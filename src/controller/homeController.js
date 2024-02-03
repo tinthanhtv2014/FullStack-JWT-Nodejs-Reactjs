@@ -4,8 +4,10 @@ const handleHome = (req, res) => {
   return res.render("home.ejs", { result: a });
 };
 
-const handleUserPage = (req, res) => {
-  return res.render("user.ejs");
+const handleUserPage = async (req, res) => {
+  let userlist = await userService.getUserList();
+  console.log("check userlist: ", userlist);
+  return res.render("user.ejs", { dataproduct: userlist });
 };
 
 const handleCreateNewUser = async (req, res) => {
@@ -18,14 +20,8 @@ const handleCreateNewUser = async (req, res) => {
   return res.send("ok");
 };
 
-// const handleGetUserList = async () => {
-//   let result = await userService.getUserList();
-//   return res.render("user.ejs", { datauser: result });
-// };
-
 module.exports = {
   handleHome,
   handleUserPage,
   handleCreateNewUser,
-  // handleGetUserList,
 };
