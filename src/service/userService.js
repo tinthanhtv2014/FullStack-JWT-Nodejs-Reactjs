@@ -34,7 +34,15 @@ const getUserList = async () => {
   return results;
 };
 
+const getDeleteUser = async (id) => {
+  const [results, fields] = await connection.execute(
+    "delete from users where id = ?",
+    [id]
+  );
+};
+
 module.exports = {
   createNewUser,
   getUserList,
+  getDeleteUser,
 };
