@@ -34,6 +34,15 @@ const getUserList = async () => {
   return results;
 };
 
+const getUserId = async (id) => {
+  let users = [];
+  const [results, fields] = await connection.execute(
+    "select * from users where id = ?",
+    [id]
+  );
+  return results;
+};
+
 const getDeleteUser = async (id) => {
   const [results, fields] = await connection.execute(
     "delete from users where id = ?",
@@ -41,8 +50,17 @@ const getDeleteUser = async (id) => {
   );
 };
 
+const getUpdateUser = async (id, email, username) => {
+  const [results, fields] = await connection.execute(
+    "UPDATE users SET email = ?, username = ? WHERE id = ?",
+    [email, username, id]
+  );
+};
+
 module.exports = {
   createNewUser,
   getUserList,
   getDeleteUser,
+  getUserId,
+  getUpdateUser,
 };
