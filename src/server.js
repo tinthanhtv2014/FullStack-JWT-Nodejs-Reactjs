@@ -1,7 +1,7 @@
 import express from "express";
 const bodyParser = require("body-parser");
 
-import configViewEngine from "./configs/viewEngine";
+import configViewEngine from "./config/viewEngine";
 import initwebRoutes from "./routes/web";
 require("dotenv").config();
 
