@@ -1,4 +1,4 @@
-import connection from "../configs/database";
+import connection from "../config/database";
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
