@@ -16,7 +16,7 @@
         <div class="user-infor-container">
           <form action="/users/update-user" method="post">
             <div class="mb-3 mt-3"><h3>Update User</h3></div>
-            <input name="id" value="<%= result2[0].id %>" hidden />
+            <input name="id" value="<%= result2.id %>" hidden />
             <div class="mb-3 mt-3 col-6">
               <label for="email" class="form-label">Email address</label>
               <input
@@ -25,7 +25,7 @@
                 id="email"
                 required
                 name="emailName"
-                value="<%= result2[0].email %>"
+                value="<%= result2.email %>"
               />
             </div>
             <div class="col-6"></div>
@@ -39,7 +39,7 @@
                 id="UserName"
                 name="UserName"
                 required
-                value="<%= result2[0].username %>"
+                value="<%= result2.username %>"
               />
             </div>
             <div class="col-12">
@@ -67,7 +67,13 @@
                 <td><%= result1[i].username %></td>
 
                 <td>
-                  <button class="btn btn-warning">Edit</button>
+                  <form
+                    style="display: inline"
+                    action="/edit-user/<%= result1[i].id %>"
+                    method="get"
+                  >
+                    <button class="btn btn-warning">Edit</button>
+                  </form>
                   <form
                     style="display: inline"
                     action="/delete-user/<%= result1[i].id %>"

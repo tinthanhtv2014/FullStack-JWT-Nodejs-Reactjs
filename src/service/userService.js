@@ -28,31 +28,49 @@ const createNewUser = async (email, password, username) => {
 };
 
 const getUserList = async () => {
-  let user = [];
-  const [results, fields] = await connection.execute("select * from user");
-  return results;
+  let users = [];
+  users = await db.User.findAll();
+  return users;
 };
 
 const getUserId = async (id) => {
-  let user = [];
-  const [results, fields] = await connection.execute(
-    "select * from user where id = ?",
-    [id]
-  );
-  return results;
+  let user = {};
+  // const [results, fields] = await connection.execute(
+  //   "select * from user where id = ?",
+  //   [id]
+  // );
+  user = await db.User.findOne({
+    where: {
+      id: id,
+    },
+  });
+  return user.get({ plain: true });
 };
 
 const getDeleteUser = async (id) => {
-  const [results, fields] = await connection.execute(
-    "delete from user where id = ?",
-    [id]
-  );
+  // const [results, fields] = await connection.execute(
+  //   "delete from user where id = ?",
+  //   [id]
+  // );
+  await db.User.destroy({
+    where: {
+      id: id,
+    },
+  });
 };
 
 const getUpdateUser = async (id, email, username) => {
-  const [results, fields] = await connection.execute(
-    "UPDATE user SET email = ?, username = ? WHERE id = ?",
-    [email, username, id]
+  // const [results, fields] = await connection.execute(
+  //   "UPDATE user SET email = ?, username = ? WHERE id = ?",
+  //   [email, username, id]
+  // );
+  await db.User.update(
+    { email: email, username: username },
+    {
+      where: {
+        id: id,
+      },
+    }
   );
 };
 

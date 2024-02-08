@@ -30,6 +30,7 @@ const handleUpdateUser = async (req, res) => {
   const id = req.params.id;
   const result1 = await userService.getUserList();
   const result2 = await userService.getUserId(id);
+
   console.log("check result: ", result2);
   return res.render("userUpdate.ejs", { result1, result2 });
 };
