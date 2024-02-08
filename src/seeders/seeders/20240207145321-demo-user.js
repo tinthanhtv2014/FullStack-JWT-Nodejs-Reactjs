@@ -12,7 +12,7 @@ module.exports = {
      * }], {});
      */
     Example: await queryInterface.bulkInsert(
-      "Users", //ten table
+      "User", //ten table
       [
         {
           email: "John Doe",

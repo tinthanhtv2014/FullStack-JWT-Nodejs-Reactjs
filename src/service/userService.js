@@ -18,7 +18,7 @@ const createNewUser = async (email, password, username) => {
     let hashPass = hashPassword(password);
 
     const [results, fields] = await connection.execute(
-      "insert into users (email,password,username) values (?,?,?)",
+      "insert into user (email,password,username) values (?,?,?)",
       [email, hashPass, username]
     );
     return results;
@@ -29,15 +29,15 @@ const createNewUser = async (email, password, username) => {
 };
 
 const getUserList = async () => {
-  let users = [];
-  const [results, fields] = await connection.execute("select * from users");
+  let user = [];
+  const [results, fields] = await connection.execute("select * from user");
   return results;
 };
 
 const getUserId = async (id) => {
-  let users = [];
+  let user = [];
   const [results, fields] = await connection.execute(
-    "select * from users where id = ?",
+    "select * from user where id = ?",
     [id]
   );
   return results;
@@ -45,14 +45,14 @@ const getUserId = async (id) => {
 
 const getDeleteUser = async (id) => {
   const [results, fields] = await connection.execute(
-    "delete from users where id = ?",
+    "delete from user where id = ?",
     [id]
   );
 };
 
 const getUpdateUser = async (id, email, username) => {
   const [results, fields] = await connection.execute(
-    "UPDATE users SET email = ?, username = ? WHERE id = ?",
+    "UPDATE user SET email = ?, username = ? WHERE id = ?",
     [email, username, id]
   );
 };
