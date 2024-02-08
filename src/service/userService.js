@@ -6,7 +6,7 @@ const myPlaintextPassword = "s0//P4$$w0rD";
 const someOtherPlaintextPassword = "not_bacon";
 const salt = bcrypt.genSaltSync(saltRounds);
 const hash = bcrypt.hashSync(myPlaintextPassword, salt);
-
+import db from "../models";
 const hashPassword = (userPassword) => {
   let hashPassword = bcrypt.hashSync(userPassword, salt);
   //let check = bcrypt.compareSync(password, hashPassword);
@@ -16,12 +16,11 @@ const hashPassword = (userPassword) => {
 const createNewUser = async (email, password, username) => {
   try {
     let hashPass = hashPassword(password);
-
-    const [results, fields] = await connection.execute(
-      "insert into user (email,password,username) values (?,?,?)",
-      [email, hashPass, username]
-    );
-    return results;
+    await db.User.create({
+      username: username,
+      email: email,
+      password: hashPass,
+    });
   } catch (error) {
     console.error("An error occurred:", error);
     return res.status(500).send(error.message || "Đã có lỗi xảy ra");
