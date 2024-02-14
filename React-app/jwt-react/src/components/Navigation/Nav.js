@@ -4,12 +4,12 @@ import { NavLink } from "react-router-dom/cjs/react-router-dom";
 const Nav = (props) => {
   return (
     <nav className="topnav">
-      <NavLink to="/" exact>
+      <a href="/" exact>
         Home
-      </NavLink>
-      <NavLink to="/contact">Contact</NavLink>
-      <NavLink to="/about">About</NavLink>
-      <NavLink to="/news">News</NavLink>
+      </a>
+      <a href="/contact">Contact</a>
+      <a href="/about">About</a>
+      <a href="/news">News</a>
     </nav>
   );
 };

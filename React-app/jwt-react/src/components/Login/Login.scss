@@ -11,8 +11,19 @@
 }
 
 .login-container {
+  min-height: 100vh;
+  padding-top: 20px;
+  background-color: #f0f2f5;
   .content-right {
-    border: 1px solid green;
-    border-radius: 10px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+
+    .forgot-password {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
 }
