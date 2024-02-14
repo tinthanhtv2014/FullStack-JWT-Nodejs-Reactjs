@@ -11,8 +11,38 @@
 }
 
 .register-container {
+  min-height: 100vh;
+  padding-top: 20px;
+  background-color: #f0f2f5;
   .content-right {
-    border: 1px solid green;
-    border-radius: 10px;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+
+    .forgot-password {
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .brand {
+      text-transform: uppercase;
+      font-size: 20px;
+      color: #1877f2;
+      font-weight: 600;
+    }
+  }
+
+  .content-left {
+    .brand {
+      text-transform: uppercase;
+      font-size: 30px;
+      color: #1877f2;
+      font-weight: 600;
+    }
+    .detail {
+      font-size: 20px;
+    }
   }
 }

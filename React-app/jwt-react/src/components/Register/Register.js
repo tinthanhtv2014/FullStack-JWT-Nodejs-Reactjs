@@ -1,6 +1,5 @@
 import React from "react";
 import "./Register.scss";
-
 import { useHistory } from "react-router-dom";
 const Register = (props) => {
   let history = useHistory();
@@ -8,17 +7,18 @@ const Register = (props) => {
     history.push("/login");
   };
   return (
-    <div className="register-container mt-3">
+    <div className="login-container">
       <div className="container">
-        <div className="row">
-          <div className="content-left col-7 d-none d-sm-block">
+        <div className="row px-3 px-sm-0">
+          <div className="content-left col-12 d-none col-sm-7 d-sm-block my-sm-auto">
             <div className="brand">Register Form</div>
-            <div className="detail">Learning React & Nodejs</div>
+            <div className="detail ">Learning React & Nodejs</div>
           </div>
-          <div className="content-right col-12 green d-flex flex-column gap-3 py-3 col-sm-5">
-            <div className="brand d-sm-none">test</div>
+
+          <div className="content-right col-12 col-sm-5 d-flex flex-column gap-3 py-3 col-sm-5 ">
+            <div className="brand d-sm-none mx-auto"> Register form</div>
             <div className="form-group">
-              <label>Email:</label>
+              <label className="mb-1">Email:</label>
               <input
                 type="text"
                 className="form-control"
@@ -27,7 +27,7 @@ const Register = (props) => {
             </div>
 
             <div className="form-group">
-              <label>Phone Number:</label>
+              <label className="mb-1">Phone Number:</label>
               <input
                 type="text"
                 className="form-control"
@@ -36,7 +36,7 @@ const Register = (props) => {
             </div>
 
             <div className="form-group">
-              <label>Username:</label>
+              <label className="mb-1">Username:</label>
               <input
                 type="text"
                 className="form-control"
@@ -45,7 +45,7 @@ const Register = (props) => {
             </div>
 
             <div className="form-group">
-              <label>Password:</label>
+              <label className="mb-1">Password:</label>
               <input
                 type="password"
                 className="form-control"
@@ -53,14 +53,13 @@ const Register = (props) => {
               />
             </div>
             <div className="form-group">
-              <label> Re-enter your Password:</label>
+              <label className="mb-1"> Re-enter your Password:</label>
               <input
                 type="password"
                 className="form-control"
                 placeholder="Re-enter Password"
               />
             </div>
-
             <button className="btn btn-primary">Register</button>
 
             <hr />

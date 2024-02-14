@@ -10,12 +10,14 @@ const Login = (props) => {
   return (
     <div className="login-container">
       <div className="container">
-        <div className="row">
-          <div className="content-left col-7 d-none d-sm-block">
+        <div className="row px-3 px-sm-0">
+          <div className="content-left col-12 d-none col-sm-7 d-sm-block my-sm-auto">
             <div className="brand">Login Form</div>
-            <div className="detail">Learning React & Nodejs</div>
+            <div className="detail ">Learning React & Nodejs</div>
           </div>
-          <div className="content-right col-12 d-flex flex-column gap-3 py-3 col-sm-5">
+
+          <div className="content-right col-12 col-sm-5 d-flex flex-column gap-3 py-3 col-sm-5 ">
+            <div className="brand d-sm-none mx-auto"> Login form</div>
             <input
               type="text"
               className="form-control"
