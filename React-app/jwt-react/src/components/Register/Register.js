@@ -3,6 +3,8 @@ import "./Register.scss";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 const Register = (props) => {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -15,7 +17,42 @@ const Register = (props) => {
     history.push("/login");
   };
 
+  const isValidInputs = () => {
+    if (!email) {
+      toast.error("email is required");
+      return false;
+    }
+    if (!phone) {
+      toast.error("phone is required");
+      return false;
+    }
+    if (!username) {
+      toast.error("username is required");
+      return false;
+    }
+    if (!password) {
+      toast.error("password is required");
+      return false;
+    }
+
+    if (password != confirmPassword) {
+      toast.error("your password is not the same");
+      return false;
+    }
+
+    let regx = /\S+@\S+\.\S+/;
+    if (!regx.test(email)) {
+      toast.error("enter a valid email address");
+      return false;
+    }
+    return true;
+  };
+
   const handleRegister = () => {
+    let check = isValidInputs();
+    if (check) {
+      toast.success("congratulations");
+    }
     let userData = { email, phone, username, password };
     console.log("check userdata:", userData);
   };
@@ -45,6 +82,7 @@ const Register = (props) => {
                 placeholder="Email address"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
+                required
               />
             </div>
 
@@ -56,6 +94,7 @@ const Register = (props) => {
                 placeholder="Phone Number"
                 value={phone}
                 onChange={(event) => setPhone(event.target.value)}
+                required
               />
             </div>
 
@@ -93,6 +132,7 @@ const Register = (props) => {
             <button
               className="btn btn-primary"
               onClick={() => handleRegister()}
+              type="submit"
             >
               Register
             </button>
