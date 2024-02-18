@@ -11,12 +11,13 @@ const Register = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [objCheckValid, setobjCheckValid] = useState({
+  const defaultValidInput = {
     isValidEmail: true,
     isValidPhone: true,
     isValidPassword: true,
     isValidConfirmPassword: true,
-  });
+  };
+  const [objCheckValid, setobjCheckValid] = useState(defaultValidInput);
 
   let history = useHistory();
   const handleLogin = () => {
@@ -24,11 +25,22 @@ const Register = (props) => {
   };
 
   const isValidInputs = () => {
+    setobjCheckValid(defaultValidInput);
     if (!email) {
       toast.error("email is required");
+      setobjCheckValid({ ...defaultValidInput, isValidEmail: false });
       return false;
     }
+
+    let regx = /\S+@\S+\.\S+/;
+    if (!regx.test(email)) {
+      setobjCheckValid({ ...defaultValidInput, isValidEmail: false });
+      toast.error("enter a valid email address");
+      return false;
+    }
+
     if (!phone) {
+      setobjCheckValid({ ...defaultValidInput, isValidPhone: false });
       toast.error("phone is required");
       return false;
     }
@@ -37,37 +49,39 @@ const Register = (props) => {
       return false;
     }
     if (!password) {
+      setobjCheckValid({ ...defaultValidInput, isValidPassword: false });
       toast.error("password is required");
       return false;
     }
 
-    if (password != confirmPassword) {
+    if (password !== confirmPassword) {
+      setobjCheckValid({ ...defaultValidInput, isValidConfirmPassword: false });
       toast.error("your password is not the same");
       return false;
     }
 
-    let regx = /\S+@\S+\.\S+/;
-    if (!regx.test(email)) {
-      toast.error("enter a valid email address");
-      return false;
-    }
     return true;
   };
 
   const handleRegister = () => {
     let check = isValidInputs();
-    if (check) {
+
+    if (check === true) {
+      axios.post("http://localhost:8081/api/v1/register", {
+        email,
+        phone,
+        username,
+        password,
+      });
       toast.success("congratulations");
     }
-    let userData = { email, phone, username, password };
-    console.log("check userdata:", userData);
   };
 
-  useEffect(() => {
-    // axios.get("http://localhost:8081/api/test-api").then((data) => {
-    //   console.log("check data: ", data);
-    // });
-  });
+  // useEffect(() => {
+  //   // axios.get("http://localhost:8081/api/v1/test-api").then((data) => {
+  //   //   console.log("check data: ", data);
+  //   // });
+  // });
 
   return (
     <div className="login-container">
@@ -86,7 +100,7 @@ const Register = (props) => {
                 type="text"
                 className={
                   objCheckValid.isValidEmail
-                    ? "form-control"
+                    ? "form-control is-valid"
                     : "form-control is-invalid"
                 }
                 placeholder="Email address"
@@ -127,7 +141,11 @@ const Register = (props) => {
               <label className="mb-1">Password:</label>
               <input
                 type="password"
-                className="form-control"
+                className={
+                  objCheckValid.isValidPassword
+                    ? "form-control"
+                    : "form-control is-invalid"
+                }
                 placeholder="Password"
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
@@ -137,7 +155,11 @@ const Register = (props) => {
               <label className="mb-1"> Re-enter your Password:</label>
               <input
                 type="password"
-                className="form-control"
+                className={
+                  objCheckValid.isValidConfirmPassword
+                    ? "form-control"
+                    : "form-control is-invalid"
+                }
                 placeholder="Re-enter Password"
                 value={confirmPassword}
                 onChange={(event) => setConfirmPassword(event.target.value)}
