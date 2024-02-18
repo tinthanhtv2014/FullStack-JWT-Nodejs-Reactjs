@@ -11,6 +11,12 @@ const Register = (props) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [objCheckValid, setobjCheckValid] = useState({
+    isValidEmail: true,
+    isValidPhone: true,
+    isValidPassword: true,
+    isValidConfirmPassword: true,
+  });
 
   let history = useHistory();
   const handleLogin = () => {
@@ -78,7 +84,11 @@ const Register = (props) => {
               <label className="mb-1">Email:</label>
               <input
                 type="text"
-                className="form-control"
+                className={
+                  objCheckValid.isValidEmail
+                    ? "form-control"
+                    : "form-control is-invalid"
+                }
                 placeholder="Email address"
                 value={email}
                 onChange={(event) => setEmail(event.target.value)}
@@ -90,7 +100,11 @@ const Register = (props) => {
               <label className="mb-1">Phone Number:</label>
               <input
                 type="text"
-                className="form-control"
+                className={
+                  objCheckValid.isValidPhone
+                    ? "form-control"
+                    : "form-control is-invalid"
+                }
                 placeholder="Phone Number"
                 value={phone}
                 onChange={(event) => setPhone(event.target.value)}
