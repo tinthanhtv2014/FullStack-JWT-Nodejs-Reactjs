@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Login.scss";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
@@ -8,7 +8,13 @@ const Login = (props) => {
 
   const [valueLogin, setValueLogin] = useState();
   const [password, setPassword] = useState();
-
+  useEffect(() => {
+    let session = sessionStorage.getItem("account");
+    if (session) {
+      history.push("/");
+      window.location.reload();
+    }
+  }, []);
   const defaultObjValidInput = {
     isValidValueLogin: true,
     isValidPassword: true,
