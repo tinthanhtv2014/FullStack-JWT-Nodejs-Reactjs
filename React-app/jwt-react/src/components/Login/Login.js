@@ -42,11 +42,18 @@ const Login = (props) => {
       sessionStorage.setItem("account", JSON.stringify(data));
 
       history.push("/users");
+      window.location.reload();
     }
     if (response && response.data && response.data.EC !== 0) {
       toast.error(response.data.EM);
     }
-    console.log(response);
+  };
+
+  const handlePressEnter = (event) => {
+    console.log("check Enter", event.key);
+    if (event.key === "Enter") {
+      handleLogin();
+    }
   };
   return (
     <div className="login-container">
@@ -86,6 +93,7 @@ const Login = (props) => {
               onChange={(event) => {
                 setPassword(event.target.value);
               }}
+              onKeyDown={(event) => handlePressEnter(event)}
             />
 
             <button className="btn btn-primary" onClick={() => handleLogin()}>

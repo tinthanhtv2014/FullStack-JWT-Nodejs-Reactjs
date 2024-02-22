@@ -100,22 +100,6 @@ const handleUserLogin = async (rawdata) => {
       EC: 1,
       DT: "",
     };
-
-    // if (isEmailExist === false) {
-    //   return {
-    //     EM: "the email or phone number incorrect,please try again",
-    //     EC: 1,
-    //     DT: "",
-    //   };
-    // }
-
-    // if (isPhoneExist === false) {
-    //   return {
-    //     EM: "the email or phone number incorrect,please try again",
-    //     EC: 1,
-    //     DT: "",
-    //   };
-    // }
   } catch (error) {
     console.log(error);
     return {
