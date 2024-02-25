@@ -2,21 +2,29 @@ import { useEffect, useState } from "react";
 import "./Users.scss";
 import { useHistory } from "react-router-dom";
 import { fetchAllUser } from "../../services/userService";
+import ReactPaginate from "react-paginate";
 const Users = (props) => {
   const [listUser, setListUser] = useState([]);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentLimit, setCurrentLimit] = useState(3);
+  const [totalPages, setTotalPages] = useState(0);
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [currentPage]);
 
   const fetchUsers = async () => {
-    let response = await fetchAllUser();
+    let response = await fetchAllUser(currentPage, currentLimit);
     if (response && response.data && response.data.EC === 0) {
-      setListUser(response.data.DT);
-      console.log(response.data.DT);
+      setTotalPages(response.data.DT.totalPages);
+      setListUser(response.data.DT.users);
     }
   };
 
+  const handlePageClick = async (event) => {
+    setCurrentPage(+event.selected + 1);
+
+    await fetchUsers(+event.selected + 1);
+  };
   return (
     <div className="container">
       <div className="manage-users-container">
@@ -30,7 +38,7 @@ const Users = (props) => {
           </div>
         </div>
         <div className="user-body">
-          <table class="table table-hover table-bordered">
+          <table className="table table-hover table-bordered">
             <thead>
               <tr>
                 <th scope="col">No</th>
@@ -57,43 +65,38 @@ const Users = (props) => {
                 </>
               ) : (
                 <>
-                  <span>not fount</span>
+                  <tr>
+                    <td>not fount</td>
+                  </tr>
                 </>
               )}
             </tbody>
           </table>
         </div>
-        <div className="user-footer">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  Previous
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  1
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  2
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  3
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  Next
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        {totalPages > 0 && (
+          <div className="user-footer">
+            <ReactPaginate
+              nextLabel="next >"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={3}
+              marginPagesDisplayed={2}
+              pageCount={totalPages}
+              previousLabel="< previous"
+              pageClassName="page-item"
+              pageLinkClassName="page-link"
+              previousClassName="page-item"
+              previousLinkClassName="page-link"
+              nextClassName="page-item"
+              nextLinkClassName="page-link"
+              breakLabel="..."
+              breakClassName="page-item"
+              breakLinkClassName="page-link"
+              containerClassName="pagination"
+              activeClassName="active"
+              renderOnZeroPageCount={null}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

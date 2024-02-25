@@ -36,6 +36,37 @@ const getAllUser = async () => {
   }
 };
 
+const getUserWithPagination = async (page, limit) => {
+  try {
+    let offset = (page - 1) * limit;
+    const { count, rows } = await db.User.findAndCountAll({
+      offset: offset,
+      limit: limit,
+    });
+
+    let totalPages = Math.ceil(count / limit);
+
+    let data = {
+      totalRows: count,
+      totalPages: totalPages,
+      users: rows,
+    };
+    console.log(data);
+    return {
+      EM: "Ok ",
+      EC: 0,
+      DT: data,
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      EM: "Somthing wrong with server response",
+      EC: 1,
+      DT: [],
+    };
+  }
+};
+
 const createNewUser = async () => {
   try {
     await db.User.create({});
@@ -73,4 +104,5 @@ module.exports = {
   createNewUser,
   updateUser,
   deleteUser,
+  getUserWithPagination,
 };
