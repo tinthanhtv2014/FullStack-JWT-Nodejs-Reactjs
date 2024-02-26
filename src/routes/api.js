@@ -1,6 +1,7 @@
 import express from "express";
 import userController from "../controller/userController";
 import apiController from "../controller/apiController";
+import groupController from "../controller/groupController";
 const router = express.Router();
 /**
  *
@@ -16,6 +17,9 @@ const initapiRoutes = (app) => {
   router.post("/user/create", userController.createFucn);
   router.put("/user/update", userController.updateFucn);
   router.delete("/user/delete", userController.deleteFucn);
+
+  router.get("/group/read", groupController.readFucn);
+
   return app.use("/api/v1/", router);
 };
 
