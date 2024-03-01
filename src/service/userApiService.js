@@ -105,16 +105,44 @@ const createNewUser = async (data) => {
 
 const updateUser = async (data) => {
   try {
+    if (!data.groupId) {
+      return {
+        EM: "update error with empty groupId",
+        EC: 1,
+        DT: "group",
+      };
+    }
     let user = await db.User.findOne({
       where: { id: data.id },
     });
     if (user) {
       //update
+      await user.update({
+        username: data.username,
+        address: data.address,
+        sex: data.sex,
+        groupId: data.groupId,
+      });
+      return {
+        EM: "update user success",
+        EC: 0,
+        DT: "",
+      };
     } else {
       //not found
+      return {
+        EM: "user not found",
+        EC: 2,
+        DT: "",
+      };
     }
   } catch (e) {
     console.log(e);
+    return {
+      EM: "something wrong with service",
+      EC: 1,
+      DT: [],
+    };
   }
 };
 const deleteUser = async (data) => {
