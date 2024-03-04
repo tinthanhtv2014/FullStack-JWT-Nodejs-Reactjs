@@ -1,5 +1,8 @@
 import db from "../models/index";
 import { Op } from "sequelize";
+import { getGroupWithRoles } from "./JWTService";
+import { createJWT } from "../middleware/JWTAction";
+require("dotenv").config();
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -59,6 +62,7 @@ const registerNewUser = async (userdata) => {
       username: userdata.username,
       password: hashPass,
       phone: userdata.phone,
+      groupId: 4,
     });
     return {
       EM: "a user is created successfully",
@@ -87,10 +91,23 @@ const handleUserLogin = async (rawdata) => {
       console.log(">>> found user wwith email or phone");
       let isCorrectPass = checkPassword(rawdata.password, user.password);
       if (isCorrectPass === true) {
+        //let token
+
+        //test roles
+        let groupWithRoles = await getGroupWithRoles(user);
+        let payload = {
+          email: user.email,
+          groupWithRoles,
+          expiresIn: process.env.JWT_EXPIRES_IN,
+        };
+        let token = createJWT(payload);
         return {
           EM: "ok!",
           EC: 0,
-          DT: "",
+          DT: {
+            access_token: token,
+            groupWithRoles,
+          },
         };
       }
     }
