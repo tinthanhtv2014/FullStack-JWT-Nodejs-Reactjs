@@ -19,7 +19,7 @@ const testMiddleware = (req, res, next) => {
 const initapiRoutes = (app) => {
   router.get("/test-api", apiController.testApi);
   router.post("/register", apiController.handleRegister);
-  router.post("/login", testMiddleware, apiController.handleLogin);
+  router.post("/login", apiController.handleLogin);
 
   router.get("/user/read", userController.readFucn);
   router.post("/user/create", userController.createFucn);

@@ -5,8 +5,10 @@ const handleHome = (req, res) => {
 };
 
 const handleUserPage = async (req, res) => {
-  let userlist = await userService.getUserList();
+  // Cookies that have not been signed
+  console.log("Cookies: ", req.cookies);
 
+  let userlist = await userService.getUserList();
   return res.render("user.ejs", { dataproduct: userlist });
 };
 
