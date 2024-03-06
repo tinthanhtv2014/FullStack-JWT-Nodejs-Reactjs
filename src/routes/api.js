@@ -8,10 +8,18 @@ const router = express.Router();
  * @param {*} app
  */
 
+const testMiddleware = (req, res, next) => {
+  console.log("test middleware");
+  if (true) {
+    return res.send("reject");
+  }
+  next();
+};
+
 const initapiRoutes = (app) => {
   router.get("/test-api", apiController.testApi);
   router.post("/register", apiController.handleRegister);
-  router.post("/login", apiController.handleLogin);
+  router.post("/login", testMiddleware, apiController.handleLogin);
 
   router.get("/user/read", userController.readFucn);
   router.post("/user/create", userController.createFucn);
