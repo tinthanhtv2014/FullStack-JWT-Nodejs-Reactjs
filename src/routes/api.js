@@ -2,26 +2,33 @@ import express from "express";
 import userController from "../controller/userController";
 import apiController from "../controller/apiController";
 import groupController from "../controller/groupController";
+import { checkUserJWT, checkUserPermission } from "../middleware/JWTAction";
 const router = express.Router();
 /**
  *
  * @param {*} app
  */
 
-const testMiddleware = (req, res, next) => {
-  console.log("test middleware");
-  if (true) {
-    return res.send("reject");
-  }
-  next();
-};
+// const checkUserLogin = (req, res, next) => {
+//   const nonSercurePaths = ["/","/register","/login"];
+//   if (nonSercurePaths.includes(req.path)) return next();
+//   if(user){
+//     next();
+//   }else{
+
+//   }
+// };
 
 const initapiRoutes = (app) => {
-  router.get("/test-api", apiController.testApi);
   router.post("/register", apiController.handleRegister);
   router.post("/login", apiController.handleLogin);
 
-  router.get("/user/read", userController.readFucn);
+  router.get(
+    "/user/read",
+    checkUserJWT,
+    checkUserPermission,
+    userController.readFucn
+  );
   router.post("/user/create", userController.createFucn);
   router.put("/user/update", userController.updateFucn);
   router.delete("/user/delete", userController.deleteFucn);

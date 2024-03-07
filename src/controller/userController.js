@@ -2,6 +2,7 @@ import db from "../models";
 import userApiService from "../service/userApiService";
 const readFucn = async (req, res) => {
   try {
+   
     if (req.query.page && req.query.limit) {
       let page = req.query.page;
       let limit = req.query.limit;
