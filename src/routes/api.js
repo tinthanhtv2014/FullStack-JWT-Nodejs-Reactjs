@@ -9,26 +9,22 @@ const router = express.Router();
  * @param {*} app
  */
 
-// const checkUserLogin = (req, res, next) => {
-//   const nonSercurePaths = ["/","/register","/login"];
+// const checkUser = (req, res, next) => {
+//   const nonSercurePaths = ["/register", "/login"];
 //   if (nonSercurePaths.includes(req.path)) return next();
-//   if(user){
+//   if (user) {
 //     next();
-//   }else{
-
+//   } else {
 //   }
 // };
 
 const initapiRoutes = (app) => {
+  router.all("*", checkUserJWT, checkUserPermission);
+
   router.post("/register", apiController.handleRegister);
   router.post("/login", apiController.handleLogin);
 
-  router.get(
-    "/user/read",
-    checkUserJWT,
-    checkUserPermission,
-    userController.readFucn
-  );
+  router.get("/user/read", userController.readFucn);
   router.post("/user/create", userController.createFucn);
   router.put("/user/update", userController.updateFucn);
   router.delete("/user/delete", userController.deleteFucn);
