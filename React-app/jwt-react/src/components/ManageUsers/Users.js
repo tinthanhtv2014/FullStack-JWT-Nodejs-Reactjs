@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./Users.scss";
 import { useHistory } from "react-router-dom";
 import { fetchAllUser, deleteUSer } from "../../services/userService";
@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import ReactPaginate from "react-paginate";
 import ModalDelete from "./ModalDelete";
 import ModalUser from "./ModalUser";
+
 const Users = (props) => {
   const [listUser, setListUser] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);

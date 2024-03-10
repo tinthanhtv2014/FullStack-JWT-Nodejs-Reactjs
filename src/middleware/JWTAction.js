@@ -62,12 +62,12 @@ const checkUserPermission = (req, res, next) => {
       return res.status(403).json({
         EC: -1,
         DT: "",
-        EM: "you dont have permission to access thuis resourse",
+        EM: "you dont have permission to access thuisss resourse",
       });
     }
-    let canAccess = roles.some((item) => {
-      item.url === currentUrl;
-    });
+    let canAccess = roles.some((item) => item.url === currentUrl);
+
+    console.log("check can access", canAccess);
 
     if (canAccess === true) {
       next();
@@ -75,7 +75,7 @@ const checkUserPermission = (req, res, next) => {
       return res.status(403).json({
         EC: -1,
         DT: "",
-        EM: "you dont have permission to access thuis resourse",
+        EM: "you dont have permission to access thuisa resourse",
       });
     }
   } else {
