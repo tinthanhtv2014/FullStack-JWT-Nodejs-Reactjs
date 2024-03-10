@@ -41,7 +41,7 @@ const Login = (props) => {
     }
 
     let response = await loginUser(valueLogin, password);
-    if (response && response.EC === 0) {
+    if (response && +response.EC === 0) {
       let groupWithRoles = response.DT.groupWithRoles;
       let email = response.DT.email;
       let username = response.DT.username;
@@ -51,7 +51,7 @@ const Login = (props) => {
         token: token,
         account: { groupWithRoles, email, username },
       };
-
+      console.log("check dadtaa", data);
       sessionStorage.setItem("account", JSON.stringify(data));
       LoginContext(data);
       history.push("/users");
