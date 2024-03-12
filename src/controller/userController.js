@@ -2,7 +2,6 @@ import db from "../models";
 import userApiService from "../service/userApiService";
 const readFucn = async (req, res) => {
   try {
-   
     if (req.query.page && req.query.limit) {
       let page = req.query.page;
       let limit = req.query.limit;
@@ -85,9 +84,23 @@ const deleteFucn = async (req, res) => {
   }
 };
 
+const getUserAccount = async (req, res) => {
+  return res.status(200).json({
+    EM: "ok",
+    EC: 0,
+    DT: {
+      access_token: req.token,
+      email: req.user.email,
+      groupWithRoles: req.user.groupWithRoles,
+      username: req.user.username,
+    },
+  });
+};
+
 module.exports = {
   readFucn,
   createFucn,
   updateFucn,
   deleteFucn,
+  getUserAccount,
 };

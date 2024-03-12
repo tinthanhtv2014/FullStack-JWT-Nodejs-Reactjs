@@ -20,9 +20,9 @@ const router = express.Router();
 
 const initapiRoutes = (app) => {
   router.all("*", checkUserJWT, checkUserPermission);
-
   router.post("/register", apiController.handleRegister);
   router.post("/login", apiController.handleLogin);
+  router.get("/account", userController.getUserAccount);
 
   router.get("/user/read", userController.readFucn);
   router.post("/user/create", userController.createFucn);

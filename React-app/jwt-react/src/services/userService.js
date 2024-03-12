@@ -38,6 +38,11 @@ const createNewUser = (userData) => {
 const updateCurrentUser = (userData) => {
   return axios.put("/api/v1/user/update", { ...userData });
 };
+
+const getUserAccount = () => {
+  return axios.get("/api/v1/account");
+};
+
 export {
   registerNewUser,
   loginUser,
@@ -46,4 +51,5 @@ export {
   fetchGroup,
   createNewUser,
   updateCurrentUser,
+  getUserAccount,
 };

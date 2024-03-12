@@ -52,10 +52,11 @@ const Login = (props) => {
         account: { groupWithRoles, email, username },
       };
       console.log("check dadtaa", data);
-      sessionStorage.setItem("account", JSON.stringify(data));
+      // sessionStorage.setItem("account", JSON.stringify(data));
       LoginContext(data);
+
       history.push("/users");
-      // window.location.reload();
+      window.location.reload();
     }
     if (response && response.EC !== 0) {
       toast.error(response.EM);
