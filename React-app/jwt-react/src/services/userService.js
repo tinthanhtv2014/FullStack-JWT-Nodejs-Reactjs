@@ -40,7 +40,7 @@ const updateCurrentUser = (userData) => {
 };
 
 const getUserAccount = () => {
-  return axios.get("/api/v1/account");
+  return axios.get(`/api/v1/account`);
 };
 
 export {

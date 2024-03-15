@@ -8,17 +8,10 @@ import {
 import { UserContext } from "../context/UserContext";
 import React from "react";
 const PrivateRoutes = (props) => {
-  // let history = useHistory();
+  
   const { user } = React.useContext(UserContext);
 
-  // useEffect(() => {
-  //   // console.log("check content user", user);
-  //   // let session = sessionStorage.getItem("account");
-  //   // if (!session) {
-  //   //   history.push("/login");
-  //   //   window.location.reload();
-  //   // }
-  // }, []);
+ 
   if (user && user.isAuthenticated === true) {
     return (
       <>

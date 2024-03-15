@@ -25,6 +25,7 @@ const UserProvider = ({ children }) => {
       setUser(data);
     }
   };
+
   useEffect(() => {
     fetchUser();
   }, []);
