@@ -10,13 +10,7 @@ const Login = (props) => {
 
   const [valueLogin, setValueLogin] = useState();
   const [password, setPassword] = useState();
-  // useEffect(() => {
-  //   let session = sessionStorage.getItem("account");
-  //   if (session) {
-  //     history.push("/");
-  //     window.location.reload();
-  //   }
-  // }, []);
+
   const defaultObjValidInput = {
     isValidValueLogin: true,
     isValidPassword: true,

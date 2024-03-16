@@ -7,15 +7,6 @@ const Nav = (props) => {
   const { user } = React.useContext(UserContext);
   let location = useLocation();
 
-  // const [isShow, setIsShow] = useState(true);
-
-  // useEffect(() => {
-  //   let session = sessionStorage.getItem("account");
-
-  //   if (location.pathname === "/login") {
-  //     setIsShow(false);
-  //   }
-  // }, []);
   if ((user && user.isAuthenticated === true) || location.pathname === "/") {
     return (
       <>

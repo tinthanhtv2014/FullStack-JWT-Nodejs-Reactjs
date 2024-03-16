@@ -5,7 +5,7 @@ const createJWT = (payload) => {
   let key = process.env.JWT_SECRET;
   let token;
   try {
-    token = jwt.sign(payload, key);
+    token = jwt.sign(payload, key, { expiresIn: process.env.JWT_EXPIRES_IN });
   } catch (e) {
     console.log(e);
   }
@@ -28,7 +28,7 @@ const verifyToken = (token) => {
 const checkUserJWT = (req, res, next) => {
   if (nonSercurePaths.includes(req.path)) return next();
   let cookie = req.cookies;
-  console.log(cookie);
+
   if (cookie && cookie.jwt) {
     let token = cookie.jwt;
     let decoded = verifyToken(token);
@@ -40,14 +40,14 @@ const checkUserJWT = (req, res, next) => {
       return res.status(401).json({
         EC: -1,
         DT: "",
-        EM: "not authenticated user",
+        EM: "not authenticatedd user",
       });
     }
   } else {
     return res.status(401).json({
       EC: -1,
       DT: "",
-      EM: "not authenticated user",
+      EM: "not authenticated dduser",
     });
   }
 };

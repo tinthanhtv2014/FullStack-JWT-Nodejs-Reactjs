@@ -85,13 +85,15 @@ const deleteFucn = async (req, res) => {
 };
 
 const getUserAccount = async (req, res) => {
+  console.log("checkuser", req.user);
   return res.status(200).json({
     EM: "ok",
     EC: 0,
     DT: {
       access_token: req.token,
-      email: req.user.email,
       groupWithRoles: req.user.groupWithRoles,
+      email: req.user.email,
+
       username: req.user.username,
     },
   });

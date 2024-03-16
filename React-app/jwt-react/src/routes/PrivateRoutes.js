@@ -8,10 +8,8 @@ import {
 import { UserContext } from "../context/UserContext";
 import React from "react";
 const PrivateRoutes = (props) => {
-  
   const { user } = React.useContext(UserContext);
 
- 
   if (user && user.isAuthenticated === true) {
     return (
       <>
