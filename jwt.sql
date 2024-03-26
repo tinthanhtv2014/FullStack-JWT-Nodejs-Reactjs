@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th2 10, 2024 lúc 03:40 PM
--- Phiên bản máy phục vụ: 10.4.28-MariaDB
--- Phiên bản PHP: 8.2.4
+-- Thời gian đã tạo: Th3 26, 2024 lúc 01:43 PM
+-- Phiên bản máy phục vụ: 10.4.32-MariaDB
+-- Phiên bản PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,6 +35,13 @@ CREATE TABLE `group` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `group`
+--
+
+INSERT INTO `group` (`id`, `name`, `description`, `createdAt`, `updatedAt`) VALUES
+(1, 'dev', 'developer', '2024-03-26 13:39:03', '2024-03-26 13:39:03');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +55,14 @@ CREATE TABLE `group_role` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `group_role`
+--
+
+INSERT INTO `group_role` (`id`, `groupId`, `roleId`, `createdAt`, `updatedAt`) VALUES
+(1, 1, 1, '2024-03-26 13:40:42', '2024-03-26 13:40:42'),
+(2, 1, 2, '2024-03-26 13:40:42', '2024-03-26 13:40:42');
 
 -- --------------------------------------------------------
 
@@ -93,6 +108,15 @@ CREATE TABLE `role` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `role`
+--
+
+INSERT INTO `role` (`id`, `url`, `description`, `createdAt`, `updatedAt`) VALUES
+(1, '/user/read', 'show all users', '2024-03-26 13:39:29', '2024-03-26 13:39:29'),
+(2, '/user/edit', 'edit user', '2024-03-26 13:39:29', '2024-03-26 13:39:29'),
+(3, '/user/delete', 'delete user', '2024-03-26 13:40:14', '2024-03-26 13:40:14');
+
 -- --------------------------------------------------------
 
 --
@@ -133,6 +157,13 @@ CREATE TABLE `user` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `user`
+--
+
+INSERT INTO `user` (`id`, `email`, `password`, `username`, `address`, `sex`, `phone`, `groupId`, `createdAt`, `updatedAt`) VALUES
+(1, 'testabc@gmail.com', '$2b$10$zK3zvKbEBTaYSE0cSTgtbenom/xNUo3aX1b9izk0fSHZ5HwTv820W', 'aadaadadd', NULL, NULL, '312312312323', 4, '2024-03-19 16:03:24', '2024-03-19 16:03:24');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -189,13 +220,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `group_role`
 --
 ALTER TABLE `group_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT cho bảng `project`
@@ -213,13 +244,13 @@ ALTER TABLE `project_user`
 -- AUTO_INCREMENT cho bảng `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
