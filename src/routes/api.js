@@ -23,7 +23,10 @@ const initapiRoutes = (app) => {
   router.post("/register", apiController.handleRegister);
   router.post("/login", apiController.handleLogin);
   router.get("/account", userController.getUserAccount);
+  router.post("/logout", apiController.handleLogout);
 
+
+  
   router.get("/user/read", userController.readFucn);
   router.post("/user/create", userController.createFucn);
   router.put("/user/update", userController.updateFucn);

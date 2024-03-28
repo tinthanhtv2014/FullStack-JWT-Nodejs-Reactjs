@@ -1,6 +1,6 @@
 require("dotenv").config();
 import jwt from "jsonwebtoken";
-const nonSercurePaths = ["/", "/register", "/login"];
+const nonSercurePaths = ["/", "/register", "/login", "/logout"];
 const createJWT = (payload) => {
   let key = process.env.JWT_SECRET;
   let token;

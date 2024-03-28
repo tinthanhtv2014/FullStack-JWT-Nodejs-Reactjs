@@ -16,12 +16,12 @@ function App() {
       <Router>
         {user && user.isLoading ? (
           <div className="loading-container">
-            <Rings
+            {/* <Rings
               heigth="100"
               width="100"
               color="#1877f2"
               ariaLabel="loading"
-            />
+            /> */}
             <div>Loading data......</div>
           </div>
         ) : (

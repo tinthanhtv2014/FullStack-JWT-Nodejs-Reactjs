@@ -40,10 +40,12 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     if (
-      window.Location.pathname !== "/" ||
+      window.Location.pathname !== "/" &&
       window.location.pathname !== "/login"
     ) {
       fetchUser();
+    } else {
+      setUser({ ...user, isLoading: false });
     }
   }, []);
 
@@ -53,15 +55,12 @@ const UserProvider = ({ children }) => {
   };
 
   // Logout updates the user data to default
-  const logout = () => {
-    setUser((user) => ({
-      name: "",
-      auth: false,
-    }));
+  const logoutContext = () => {
+    setUser({ ...userDefault, isLoading: false });
   };
 
   return (
-    <UserContext.Provider value={{ user, LoginContext, logout }}>
+    <UserContext.Provider value={{ user, LoginContext, logoutContext }}>
       {children}
     </UserContext.Provider>
   );
