@@ -58,6 +58,9 @@ const NavHeader = (props) => {
                   <NavLink className="nav-link" to="/about">
                     About
                   </NavLink>
+                  <NavLink className="nav-link" to="/roles">
+                    Roles
+                  </NavLink>
                 </Nav>
                 <Nav>
                   {user && user.isAuthenticated === true ? (
