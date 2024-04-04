@@ -1,25 +1,28 @@
 import "./Role.scss";
 import { useEffect, useState } from "react";
 import _ from "lodash";
+import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
+import { createRoles } from "../../services/roleService";
 const Role = (props) => {
+  const dataChildDefault = { url: "", description: "", isValidUrl: true };
   const [listchilds, setListChilds] = useState({
-    child1: { url: "", description: "" },
+    child1: dataChildDefault,
   });
 
   const handleOnchangeInput = (name, value, key) => {
     let _listchilds = _.cloneDeep(listchilds);
 
     _listchilds[key][name] = value;
+    if (value && name === "url") {
+      _listchilds[key]["isValidUrl"] = true;
+    }
     setListChilds(_listchilds);
   };
 
   const handleAddNewInput = () => {
     let _listchilds = _.cloneDeep(listchilds);
-    _listchilds[`child-${uuidv4()}`] = {
-      url: "",
-      description: "",
-    };
+    _listchilds[`child-${uuidv4()}`] = dataChildDefault;
     setListChilds(_listchilds);
   };
   const handleDeleteInput = (name) => {
@@ -28,6 +31,44 @@ const Role = (props) => {
     setListChilds(_listchilds);
     console.log(name);
   };
+
+  const buildDataToPersist = () => {
+    let _listchilds = _.cloneDeep(listchilds);
+    let result = [];
+    let invalidObj = Object.entries(listchilds).map(([key, child], index) => {
+      result.push({
+        url: child.url,
+        description: child.description,
+      });
+    });
+    return result;
+  };
+
+  const handleSave = async (data) => {
+    console.log(listchilds);
+    let check = true;
+    let invalidObj = Object.entries(listchilds).find(([key, child], index) => {
+      return child && !child.url;
+    });
+
+    if (!invalidObj) {
+      //call api
+      let data = buildDataToPersist();
+      let res = await createRoles(data);
+      if (res && res.EC === 0) {
+        toast.success(res.EM);
+      }
+    } else {
+      //eror
+      toast.error("input URL must not be empty");
+      console.log("check invalel", invalidObj);
+      let _listchilds = _.cloneDeep(listchilds);
+      const key = invalidObj[0];
+      _listchilds[key]["isValidUrl"] = false;
+      setListChilds(_listchilds);
+    }
+  };
+
   return (
     <>
       <div className="role-container">
@@ -44,7 +85,11 @@ const Role = (props) => {
                       <label htmlFor="">URL:</label>
                       <input
                         type="text"
-                        className="form-control"
+                        className={
+                          child.isValidUrl
+                            ? "form-control"
+                            : "form-control is-invalid"
+                        }
                         value={child.url}
                         onChange={(event) =>
                           handleOnchangeInput("url", event.target.value, key)
@@ -83,7 +128,12 @@ const Role = (props) => {
               })}
 
               <div>
-                <button className="btn btn-primary mt-3">Save</button>
+                <button
+                  className="btn btn-primary mt-3"
+                  onClick={() => handleSave()}
+                >
+                  Save
+                </button>
               </div>
             </div>
           </div>

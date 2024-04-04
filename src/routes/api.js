@@ -2,6 +2,7 @@ import express from "express";
 import userController from "../controller/userController";
 import apiController from "../controller/apiController";
 import groupController from "../controller/groupController";
+import roleController from "../controller/roleController";
 import { checkUserJWT, checkUserPermission } from "../middleware/JWTAction";
 const router = express.Router();
 /**
@@ -25,13 +26,19 @@ const initapiRoutes = (app) => {
   router.get("/account", userController.getUserAccount);
   router.post("/logout", apiController.handleLogout);
 
+  //role routes
+  router.get("/role/read", roleController.readFucn);
+  router.post("/role/create", roleController.createFucn);
+  router.put("/role/update", roleController.updateFucn);
+  router.delete("/role/delete", roleController.deleteFucn);
 
-  
+  //users routes
   router.get("/user/read", userController.readFucn);
   router.post("/user/create", userController.createFucn);
   router.put("/user/update", userController.updateFucn);
   router.delete("/user/delete", userController.deleteFucn);
 
+  //group routes
   router.get("/group/read", groupController.readFucn);
 
   return app.use("/api/v1/", router);
