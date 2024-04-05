@@ -27,10 +27,10 @@ const initapiRoutes = (app) => {
   router.post("/logout", apiController.handleLogout);
 
   //role routes
-  router.get("/role/read", roleController.readFucn);
-  router.post("/role/create", roleController.createFucn);
-  router.put("/role/update", roleController.updateFucn);
-  router.delete("/role/delete", roleController.deleteFucn);
+  router.get("/role/read", roleController.readFucnn);
+  router.post("/role/create", roleController.createFucnn);
+  router.put("/role/update", roleController.updateFucnn);
+  router.delete("/role/delete", roleController.deleteFucnn);
 
   //users routes
   router.get("/user/read", userController.readFucn);

@@ -1,5 +1,6 @@
 require("dotenv").config();
 import jwt from "jsonwebtoken";
+
 const nonSercurePaths = ["/", "/register", "/login", "/logout"];
 const createJWT = (payload) => {
   let key = process.env.JWT_SECRET;
@@ -86,7 +87,7 @@ const checkUserPermission = (req, res, next) => {
       return res.status(403).json({
         EC: -1,
         DT: "",
-        EM: "you dont have permission to access thuisa resourse",
+        EM: "you dont have permission to access thuisaa resourse",
       });
     }
   } else {

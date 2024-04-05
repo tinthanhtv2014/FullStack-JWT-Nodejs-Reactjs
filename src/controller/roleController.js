@@ -1,26 +1,14 @@
 import db from "../models";
 import userApiService from "../service/userApiService";
 import roleApiService from "../service/roleApiService";
-const readFucn = async (req, res) => {
+const readFucnn = async (req, res) => {
   try {
-    if (req.query.page && req.query.limit) {
-      let page = req.query.page;
-      let limit = req.query.limit;
-      console.log("check data", page, limit);
-      let data = await userApiService.getUserWithPagination(+page, +limit);
-      return res.status(200).json({
-        EM: data.EM,
-        EC: data.EC,
-        DT: data.DT,
-      });
-    } else {
-      let data = await userApiService.getAllUser();
-      return res.status(200).json({
-        EM: data.EM,
-        EC: data.EC,
-        DT: data.DT,
-      });
-    }
+    let data = await roleApiService.getAllRoles();
+    return res.status(200).json({
+      EM: data.EM,
+      EC: data.EC,
+      DT: data.DT,
+    });
   } catch (e) {
     console.log(e);
     return res.status(500).json({
@@ -31,7 +19,7 @@ const readFucn = async (req, res) => {
   }
 };
 
-const createFucn = async (req, res) => {
+const createFucnn = async (req, res) => {
   try {
     let data = await roleApiService.createNewRoles(req.body);
     return res.status(200).json({
@@ -49,7 +37,7 @@ const createFucn = async (req, res) => {
   }
 };
 
-const updateFucn = async (req, res) => {
+const updateFucnn = async (req, res) => {
   try {
     let data = await userApiService.updateUser(req.body);
     return res.status(200).json({
@@ -67,9 +55,9 @@ const updateFucn = async (req, res) => {
   }
 };
 
-const deleteFucn = async (req, res) => {
+const deleteFucnn = async (req, res) => {
   try {
-    let data = await userApiService.deleteUser(req.body.id);
+    let data = await roleApiService.deleteRole(req.body.id);
     return res.status(200).json({
       EM: data.EM,
       EC: data.EC,
@@ -86,8 +74,8 @@ const deleteFucn = async (req, res) => {
 };
 
 module.exports = {
-  readFucn,
-  createFucn,
-  updateFucn,
-  deleteFucn,
+  readFucnn,
+  createFucnn,
+  updateFucnn,
+  deleteFucnn,
 };

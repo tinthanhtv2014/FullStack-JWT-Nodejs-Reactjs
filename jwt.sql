@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th4 04, 2024 lúc 06:45 PM
--- Phiên bản máy phục vụ: 10.4.32-MariaDB
--- Phiên bản PHP: 8.2.12
+-- Thời gian đã tạo: Th4 05, 2024 lúc 04:36 PM
+-- Phiên bản máy phục vụ: 10.4.28-MariaDB
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,7 +42,8 @@ CREATE TABLE `group` (
 INSERT INTO `group` (`id`, `name`, `description`, `createdAt`, `updatedAt`) VALUES
 (1, 'dev', 'developer', '2024-03-26 13:39:03', '2024-03-26 13:39:03'),
 (2, 'leader', 'this is leader', '2024-04-01 14:43:50', '2024-04-01 14:43:50'),
-(3, 'customer', 'our customer', '2024-04-01 14:43:50', '2024-04-01 14:43:50');
+(3, 'customer', 'our customer', '2024-04-01 14:43:50', '2024-04-01 14:43:50'),
+(4, 'guess', 'view only', '2024-04-05 15:15:48', '2024-04-05 15:15:48');
 
 -- --------------------------------------------------------
 
@@ -63,10 +64,12 @@ CREATE TABLE `group_role` (
 --
 
 INSERT INTO `group_role` (`id`, `groupId`, `roleId`, `createdAt`, `updatedAt`) VALUES
-(1, 4, 3, '2024-03-26 13:40:42', '2024-03-26 13:40:42'),
+(1, 3, 3, '2024-03-26 13:40:42', '2024-03-26 13:40:42'),
 (2, 4, 2, '2024-03-26 13:40:42', '2024-03-26 13:40:42'),
 (3, 4, 5, '2024-04-01 14:39:10', '2024-04-01 14:39:10'),
-(4, 4, 6, '2024-04-04 18:35:16', '2024-04-04 18:35:16');
+(4, 4, 6, '2024-04-04 18:35:16', '2024-04-04 18:35:16'),
+(5, 4, 7, '2024-04-05 16:06:43', '2024-04-05 16:06:43'),
+(6, 4, 8, '2024-04-05 16:17:05', '2024-04-05 16:17:05');
 
 -- --------------------------------------------------------
 
@@ -120,9 +123,10 @@ INSERT INTO `role` (`id`, `url`, `description`, `createdAt`, `updatedAt`) VALUES
 (1, '/user/read', 'show all users', '2024-03-26 13:39:29', '2024-03-26 13:39:29'),
 (2, '/user/edit', 'edit user', '2024-03-26 13:39:29', '2024-03-26 13:39:29'),
 (3, '/user/delete', 'delete user', '2024-03-26 13:40:14', '2024-03-26 13:40:14'),
-(4, '/user/update', NULL, '2024-04-01 14:38:22', '2024-04-01 14:38:22'),
 (5, '/group/read', NULL, '2024-04-01 14:38:22', '2024-04-01 14:38:22'),
-(6, '/role/create', 'create roles', '2024-04-04 18:34:44', '2024-04-04 18:34:44');
+(6, '/role/create', 'create roles', '2024-04-04 18:34:44', '2024-04-04 18:34:44'),
+(7, '/role/read', NULL, '2024-04-05 16:05:50', '2024-04-05 16:05:50'),
+(14, 'test', '', '2024-04-05 14:33:00', '2024-04-05 14:33:00');
 
 -- --------------------------------------------------------
 
@@ -171,7 +175,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `email`, `password`, `username`, `address`, `sex`, `phone`, `groupId`, `createdAt`, `updatedAt`) VALUES
 (1, 'testabc@gmail.com', '$2b$10$zK3zvKbEBTaYSE0cSTgtbenom/xNUo3aX1b9izk0fSHZ5HwTv820W', 'aadaadadd', NULL, NULL, '312312312323', 4, '2024-03-19 16:03:24', '2024-03-19 16:03:24'),
-(2, 'thanh@gmail.com', '$2b$10$hVv0GvuqXpNErv.H7rvNd.3F6A/d53964brFb3LpgLqBEiIjThtTG', '12313123123', NULL, NULL, '123123123123', 4, '2024-03-28 12:10:30', '2024-03-28 12:10:30');
+(2, 'thanh@gmail.com', '$2b$10$hVv0GvuqXpNErv.H7rvNd.3F6A/d53964brFb3LpgLqBEiIjThtTG', '12313123123', NULL, NULL, '123123123123', 4, '2024-03-28 12:10:30', '2024-03-28 12:10:30'),
+(3, 'thanh1@gmail.com', '$2b$10$0rrIUCz.Yx0mr4iJ.ZN0TeKJ9XNLMBM/4TKhvn22ZEkm8o.Fgb3Pe', '1321312313123131231231313', NULL, NULL, '12312312311231231231', 4, '2024-04-05 12:17:42', '2024-04-05 12:17:42');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -228,13 +233,13 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT cho bảng `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT cho bảng `group_role`
 --
 ALTER TABLE `group_role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT cho bảng `project`
@@ -252,13 +257,13 @@ ALTER TABLE `project_user`
 -- AUTO_INCREMENT cho bảng `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
