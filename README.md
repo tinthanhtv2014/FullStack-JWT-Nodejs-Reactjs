@@ -22,12 +22,10 @@ The User Management System allows administrators to perform CRUD operations on u
 - **React.js**: Frontend library for building user interfaces.
 - **JWT (JSON Web Tokens)**: Used for user authentication and authorization.
 - **Cookies**: Utilized for session management and maintaining user sessions.
-- **MongoDB**: NoSQL database used for storing user account information.
-- **Mongoose**: MongoDB object modeling for Node.js, providing a schema-based solution to model application data.
-
+- **MySQL**: MySQL database used for storing user account information.
 ## Setup Instructions
 
-1. Clone the repository: `git clone https://github.com/yourusername/user-management-system.git`
+1. Clone the repository: `git clone https://github.com/tinthanhtv2014/FullStack-JWT-Nodejs-Reactjs.git`
 2. Navigate to the project directory: `cd user-management-system`
 3. Install dependencies for the backend: `npm install`
 4. Install dependencies for the frontend: `cd client && npm install`
