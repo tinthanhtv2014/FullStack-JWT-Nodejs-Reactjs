@@ -26,9 +26,9 @@ The User Management System allows administrators to perform CRUD operations on u
 ## Setup Instructions
 
 1. Clone the repository: `git clone https://github.com/tinthanhtv2014/FullStack-JWT-Nodejs-Reactjs.git`
-2. Navigate to the project directory: `cd user-management-system`
-3. Install dependencies for the backend: `npm install`
-4. Install dependencies for the frontend: `cd client && npm install`
+2. Install dependencies for the backend: `npm install`
+3. Go to React-app => my-app to open frontend
+4. Install dependencies for the frontend: `npm install`
 5. Start the backend server: `npm start`
 6. Start the frontend development server: `npm start` (in the client directory)
 
