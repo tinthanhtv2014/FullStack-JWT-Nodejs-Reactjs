@@ -31,6 +31,7 @@ const initapiRoutes = (app) => {
   router.post("/role/create", roleController.createFucnn);
   router.put("/role/update", roleController.updateFucnn);
   router.delete("/role/delete", roleController.deleteFucnn);
+  router.get("/role/by-group/:groupId", roleController.getRoleByGroup);
 
   //users routes
   router.get("/user/read", userController.readFucn);
