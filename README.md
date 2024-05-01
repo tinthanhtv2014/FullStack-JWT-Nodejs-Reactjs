@@ -32,7 +32,7 @@ The User Management System allows administrators to perform CRUD operations on u
 5. Start the backend server: `npm start`
 6. Start the frontend development server: `npm start` (in the client directory)
 
-Make sure you have Node.js and MongoDB installed on your machine before running the project.
+Make sure you have Node.js and MYSQL installed on your machine before running the project.
 
 ## Contributing
 
